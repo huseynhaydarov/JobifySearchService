@@ -4,11 +4,8 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageId>SearchService.ApiClient</PackageId>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Version>1.0.1</Version>
-        <Authors>huseynhaydarov</Authors>
-        <RepositoryUrl>https://github.com/huseynhaydarov/JobifySearchService</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
