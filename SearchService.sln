@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchService.WebApi", "SearchService.WebApi\SearchService.WebApi.csproj", "{D1C4DC3D-D097-4FC2-B8BC-D2F3092990ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchService.ApiClient", "SearchService.ApiClient\SearchService.ApiClient.csproj", "{54B4196D-24A0-4CD2-84E8-73174CCB99D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchService.Contracts", "SearchService.Contracts\SearchService.Contracts.csproj", "{7532CFAF-ECFE-4E85-A699-D3F7A65A012F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{D1C4DC3D-D097-4FC2-B8BC-D2F3092990ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1C4DC3D-D097-4FC2-B8BC-D2F3092990ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1C4DC3D-D097-4FC2-B8BC-D2F3092990ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54B4196D-24A0-4CD2-84E8-73174CCB99D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54B4196D-24A0-4CD2-84E8-73174CCB99D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54B4196D-24A0-4CD2-84E8-73174CCB99D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54B4196D-24A0-4CD2-84E8-73174CCB99D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7532CFAF-ECFE-4E85-A699-D3F7A65A012F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7532CFAF-ECFE-4E85-A699-D3F7A65A012F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7532CFAF-ECFE-4E85-A699-D3F7A65A012F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7532CFAF-ECFE-4E85-A699-D3F7A65A012F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

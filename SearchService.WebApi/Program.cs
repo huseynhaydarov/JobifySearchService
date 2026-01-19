@@ -1,3 +1,5 @@
+using SearchService.Contracts.Responses;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
@@ -17,7 +19,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("jobListings/search", async (string searchTerm, SearchDbContext context) =>
+app.MapGet("api/jobListings/search", async (string searchTerm, SearchDbContext context) =>
 {
     var query =  context.JobSearchDocuments
         .Where(j => j.SearchVector.Matches(EF.Functions.PlainToTsQuery("english", searchTerm)));
