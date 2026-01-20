@@ -1,7 +1,3 @@
-using MassTransit;
-using SearchService.Contracts.Responses;
-using SearchService.Infrastructure.Consumers;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
@@ -12,7 +8,6 @@ builder.Services.AddDbContext<SearchDbContext>(options =>
 
 builder.Services.AddMassTransit(options =>
 {
-    
     options.AddConsumer<JobListingCreatedConsumer>();
     options.AddConsumer<JobListingDeletedConsumer>();
     options.AddConsumer<JobListingUpdatedConsumer>();

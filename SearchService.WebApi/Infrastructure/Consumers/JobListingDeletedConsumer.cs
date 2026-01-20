@@ -1,5 +1,4 @@
 ﻿using Jobify.Contracts.JobListings.IntegrationEvents;
-using MassTransit;
 using SearchService.Domain;
 
 namespace SearchService.Infrastructure.Consumers;
