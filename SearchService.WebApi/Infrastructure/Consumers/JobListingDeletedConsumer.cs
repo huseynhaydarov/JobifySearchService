@@ -1,9 +1,9 @@
-﻿using Jobify.Contracts.JobListings.IntegrationEvents;
+﻿using Jobify.Contracts.JobListings.Events;
 using SearchService.Domain;
 
 namespace SearchService.Infrastructure.Consumers;
 
-public class JobListingDeletedConsumer : IConsumer<JobListingDeleted>
+public class JobListingDeletedConsumer : IConsumer<JobListingDeletedEvent>
 {
     private readonly ILogger<JobListingDeletedConsumer> _logger;
     private readonly SearchDbContext _dbContext;
@@ -14,7 +14,7 @@ public class JobListingDeletedConsumer : IConsumer<JobListingDeleted>
         _dbContext = dbContext;
     }
 
-    public async Task Consume(ConsumeContext<JobListingDeleted> context)
+    public async Task Consume(ConsumeContext<JobListingDeletedEvent> context)
     {
         var message = context.Message;
         
