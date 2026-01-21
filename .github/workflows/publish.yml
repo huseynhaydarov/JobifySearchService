@@ -1,0 +1,35 @@
+name: Publish ApiClient
+
+# Trigger: run on push to main branch
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2️⃣ Setup .NET SDK
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      # 3️⃣ Restore dependencies
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # 4️⃣ Pack the project (create .nupkg)
+      - name: Pack SearchService.ApiClient
+        run: dotnet pack dotnet pack SearchService.ApiClient/SearchService.ApiClient.csproj -c Release -o ./nupkgs
+
+      # 5️⃣ Push the package to GitHub Packages
+      - name: Push package to GitHub Packages
+        run: dotnet nuget push ./nupkgs/*.nupkg \
+          --source "https://nuget.pkg.github.com/huseynhadyarov/index.json" \
+          --api-key ${{ secrets.GITHUB_TOKEN }}
