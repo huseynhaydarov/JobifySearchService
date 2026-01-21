@@ -2,8 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <PackageId>JobifySearchService.Contracts</PackageId>
+        <Version>1.0.1</Version>
+        <Authors>Jobify</Authors>
+        <Description>Contracts shared</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
