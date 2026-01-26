@@ -1,6 +1,6 @@
-﻿using SearchService.Domain;
+﻿using SearchService.Api.Domain;
 
-namespace SearchService.Infrastructure.Persistence;
+namespace SearchService.Api.Infrastructure.Persistence;
 
 public class SearchDbContext : DbContext
 {

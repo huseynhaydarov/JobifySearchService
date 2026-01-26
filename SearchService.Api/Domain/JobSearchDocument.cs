@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using NpgsqlTypes;
 
-namespace SearchService.Domain;
+namespace SearchService.Api.Domain;
 
 public class JobSearchDocument
 {

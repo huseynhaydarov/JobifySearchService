@@ -1,7 +1,8 @@
 ﻿using Jobify.Contracts.JobListings.Events;
-using SearchService.Domain;
+using SearchService.Api.Domain;
+using SearchService.Api.Infrastructure.Persistence;
 
-namespace SearchService.Infrastructure.Consumers;
+namespace SearchService.Api.Infrastructure.Consumers;
 
 public class JobListingCreatedConsumer : IConsumer<JobListingCreatedEvent>
 {
