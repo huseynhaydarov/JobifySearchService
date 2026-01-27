@@ -12,9 +12,6 @@
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     networks:
       - search-service-network
 
@@ -31,9 +28,6 @@
       - rabbitmq_data:/var/lib/rabbitmq
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     networks:
       - search-service-network
 
@@ -43,12 +37,9 @@
       dockerfile: SearchService.Api/Dockerfile
     container_name: search-service-api
     environment:
-      - ASPNETCORE_ENVIRONMENT=Docker
-      - ASPNETCORE_URLS=http://+:8080
-      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=searchServiceDb;Username=postgres;Password=7878_Postgresql
-      - RabbitMQ__Host=rabbitmq
-      - RabbitMQ__Username=guest
-      - RabbitMQ__Password=guest
+      ASPNETCORE_ENVIRONMENT: Docker
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=searchServiceDb;Username=postgres;Password=7878_Postgresql
+      RabbitMQ__Host: rabbitmq
     ports:
       - "5041:8080"
     depends_on:

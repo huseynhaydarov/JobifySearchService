@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using SearchService.Api.Infrastructure.Consumers;
 using SearchService.Api.Infrastructure.Persistence;
 
@@ -7,6 +8,14 @@ builder.Services.AddDbContext<SearchDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddMagicOnion();
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(8080, listen =>
+    {
+        listen.Protocols = HttpProtocols.Http2;
+    });
+});
 
 builder.Services.AddMassTransit(options =>
 {
