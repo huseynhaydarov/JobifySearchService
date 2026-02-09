@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using SearchService.Api.Infrastructure.Consumers;
 using SearchService.Api.Infrastructure.Persistence;
 
@@ -8,6 +9,14 @@ builder.Services.AddDbContext<SearchDbContext>(options =>
 
 builder.Services.AddMagicOnion();
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(8080, listen =>
+    {
+        listen.Protocols = HttpProtocols.Http2;
+    });
+});
+
 builder.Services.AddMassTransit(options =>
 {
     options.AddConsumer<JobListingCreatedConsumer>();
@@ -16,7 +25,9 @@ builder.Services.AddMassTransit(options =>
     
     options.UsingRabbitMq((context, cfg) =>
     {
-        cfg.Host("rabbitmq://localhost", h =>
+        var host = builder.Configuration["RabbitMQ:Host"];
+        
+        cfg.Host(host, h =>
         {
             h.Username("guest"); 
             h.Password("guest");
@@ -41,6 +52,22 @@ builder.Services.AddMassTransit(options =>
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<SearchDbContext>();
+        context.Database.Migrate();
+        app.Logger.LogInformation("Database migrations applied successfully");
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "An error occurred while migrating the database");
+        throw;
+    }
+}
 
 app.MapMagicOnionService();
 

@@ -1,0 +1,60 @@
+﻿services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: search-service-postgres
+    environment:
+      POSTGRES_DB: searchServiceDb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 7878_Postgresql
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+    networks:
+      - search-service-network
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: search-service-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"   
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+    networks:
+      - search-service-network
+
+  search-service-api:
+    build:
+      context: .
+      dockerfile: SearchService.Api/Dockerfile
+    container_name: search-service-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=searchServiceDb;Username=postgres;Password=7878_Postgresql
+      RabbitMQ__Host: rabbitmq
+    ports:
+      - "5041:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - search-service-network
+    restart: unless-stopped
+
+networks:
+  search-service-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  rabbitmq_data:
